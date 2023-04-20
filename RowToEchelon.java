@@ -1,34 +1,34 @@
 public class RowToEchelon {
-    public static double[][] convertToEchelon(double[][] aug){
-        int rows = aug.length;
-        int cols = aug[0].length;
+    public static double[][] convertToEchelon(double[][] augmented_matrix){
+        int rows = augmented_matrix.length;
+        int cols = augmented_matrix[0].length;
         int pivot = 0;
         for (int i = 0; i < cols-1; i++) {
             boolean pivotExists = false;
             for (int j = 0; j <rows ; j++) {
-                if(aug[j][i]!=0){
+                if(augmented_matrix[j][i]!=0){
                     pivotExists = true;
                     if(i !=pivot){
-                        double[] temp = aug[j];
-                        aug[j] = aug[pivot];
-                        aug[pivot] = temp;
+                        double[] temp = augmented_matrix[j];
+                        augmented_matrix[j] = augmented_matrix[pivot];
+                        augmented_matrix[pivot] = temp;
                     }
                     pivotExists = true;
                     break;
                 }
             }
             if(pivotExists){
-                double pivotValue = aug[pivot][i];
+                double pivotValue = augmented_matrix[pivot][i];
                 for (int j = pivot+1; j <rows ; j++) {
-                    double multiplier = aug[j][i]/pivotValue;
+                    double multiplier = augmented_matrix[j][i]/pivotValue;
                     for (int k = i; k <cols ; k++) {
-                        aug[j][k] -= multiplier*aug[pivot][k];
+                        augmented_matrix[j][k] -= multiplier*augmented_matrix[pivot][k];
                     }
                 }
                 pivot++;
             }
         }
-        return aug;
+        return augmented_matrix;
     }
     public static void printMatrix(double[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
@@ -40,9 +40,9 @@ public class RowToEchelon {
     }
     public static void main(String[] args) {
         double[][] augmented_matrix = {
-                {2, 0, 4, 5},
-                {4, 4, 4, 7},
-                {6, 8, 22, 4}
+                {7, 0, 4, 5},
+                {88, 4, 4, 72},
+                {9, 8, 22, 7}
         };
         double[][] echelonForm = convertToEchelon(augmented_matrix);
         printMatrix(echelonForm);
